@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>חצי מרתון ב-12 שבועות — התוכנית של עומרי</title>
+<title>חצי מרתון - התוכנית והריצות שלך</title><meta name="description" content="12 שבועות לחצי מרתון. שבת ארוכה, ראשון שחרור, ויומן הריצות שביצעת.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -94,6 +94,21 @@
   .w-focus span { font-weight:700; }
 
   footer { margin-top:44px; text-align:center; font-size:13px; color:#8a919c; }
+
+nav.quick {display:flex;gap:8px;justify-content:center;margin:20px 0 0;flex-wrap:wrap}
+nav.quick a {color:#23272e;background:white;border:1px solid #e6e1d6;padding:10px 15px;border-radius:10px;text-decoration:none;font-size:14px;min-height:44px}
+.next {background:#edf4ef;border:1px solid #d0e0d4;border-radius:18px;padding:20px;margin:24px 0 14px}
+.next .eyebrow{color:#42694c;font-size:13px;font-weight:700}
+.next h2{font-size:24px;margin:7px 0 4px;line-height:1.35}.next p{font-size:15px}
+.structure{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.structure div{background:#fff;border:1px solid #e6e1d6;border-radius:12px;padding:11px 8px;text-align:center;font-size:13px}.structure b{display:block;font-size:15px}
+.log-card{background:#fff;border:1px solid #e6e1d6;border-radius:16px;padding:17px;margin:10px 0}
+.log-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.log-date{font-size:14px;font-weight:700}.log-distance{font-size:24px;font-weight:900;white-space:nowrap}.log-distance small{font-size:13px;font-weight:500}
+.log-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;border-top:1px solid #eee9e0;padding-top:12px;margin-top:12px}.metric small{display:block;color:#5c6470;font-size:12px}.metric b{font-size:17px}.log-note{color:#5c6470;font-size:12px;margin-top:10px}.freshness{font-size:12px;color:#5c6470;margin-top:12px}
+#week-picker{max-width:100%;min-height:44px;border:1px solid #e6e1d6;background:white;border-radius:10px;padding:8px 12px;color:#23272e;font:inherit;margin-bottom:12px;width:100%}
+.week.current{border:2px solid #629477}.week-label{color:#42694c;font-size:12px;font-weight:700;margin-bottom:8px}
+.r-day{width:44px}.r-km{min-width:56px;white-space:nowrap}.r-note{min-width:0}.run{gap:9px;padding:10px 11px}.w-dates{direction:ltr;white-space:nowrap}.w-head>div:first-child{min-width:0}
+@media(max-width:390px){.r-note{font-size:12px}.r-km{font-size:18px}.r-day{width:38px}.wrap{padding-left:14px;padding-right:14px}}
 </style>
 </head>
 <body>
@@ -102,156 +117,160 @@
   <header>
     <span class="kicker">קאמבק · 12 שבועות</span>
     <h1>חצי מרתון.<br>בקצב שלך.</h1>
-    <p class="sub">מהדלת ועד 21.1 ק"מ — שלוש ריצות בשבוע, ראשון, שלישי ושישי ב-06:00. רוצה להזיז ימים? אפשר. העיקר יום מנוחה בין ריצה לריצה.</p>
+    <p class="sub">שלוש ריצות בשבוע. שבת שמורה לארוכה, ראשון בדרך כלל לשחרור. הריצה הנוספת ביום שמתאים לך.</p>
     <div class="race-chip">
       <div class="chip">מתחילים: <b>ראשון 27.9</b></div>
       <div class="chip">המרוץ: <b>שישי 18.12</b></div>
     </div>
-  </header>
+  <nav class="quick" aria-label="ניווט בעמוד"><a href="#next">הריצה הבאה</a><a href="#log">הריצות שלך</a><a href="#plan">כל התוכנית</a></nav></header>
+<section class="next" id="next" aria-labelledby="next-title"></section>
+<div class="structure" aria-label="מבנה השבוע"><div><b>שבת</b>ריצה ארוכה</div><div><b>ראשון</b>בדרך כלל שחרור</div><div><b>שאר הימים</b>הריצה הנוספת גמישה</div></div>
+<section id="log" aria-labelledby="log-title"><h2 class="section" id="log-title">הריצות שלך</h2><div id="run-log"></div><p class="freshness">עדכון אחרון: 7.10.2026 · לפי הנתונים ששלחת. אין חיבור אוטומטי ל-Garmin.</p></section>
+
 
   <div class="honest">
-    <b>מילה כנה:</b> 12 שבועות מבסיס של 5–6 ק"מ זה אתגר אמיתי, אז התוכנית בנויה בזהירות: רוב הקילומטרים בקצב קל, ריצה ארוכה אחת בשבוע, ושבועות ריכוך בדרך. המטרה של המחזור הזה היא אחת — לעמוד על קו הזינוק בריא ולסיים עם חיוך. <b>בלי יעד זמן.</b> הזמן יגיע במחזור הבא.
+    <b>מילה כנה:</b> 12 שבועות מבסיס של 5–6 ק"מ זה אתגר אמיתי, אז התוכנית בנויה בזהירות: רוב הקילומטרים בקצב קל, ריצה ארוכה אחת בשבוע, ושבועות ריכוך בדרך. המטרה של המחזור הזה היא אחת - לעמוד על קו הזינוק בריא ולסיים עם חיוך. <b>בלי יעד זמן.</b> הזמן יגיע במחזור הבא.
   </div>
 
   <h2 class="section">כללי משחק</h2>
   <ul class="rules">
     <li><span class="dot">🗣️</span><span><b>קצב קל</b> = מסוגל לדבר במשפטים שלמים. נגמר לך האוויר? מאטים. בלי בושה.</span></li>
     <li><span class="dot">🚶</span><span><b>הליכה מותרת תמיד.</b> בשבועות 1–4 היא חלק מהתוכנית, לא כשלון. דקת הליכה בכל 10 דקות ריצה זה בסדר גמור.</span></li>
-    <li><span class="dot">👟</span><span><b>קדנס:</b> לכוון לכיוון 170 צעדים בדקה — צעדים קצרים ומהירים, יותר בריא לברכיים.</span></li>
-    <li><span class="dot">🐢</span><span><b>ריצה ארוכה מתחילה מביך-לאט.</b> 15 הדקות הראשונות הלוך-רוץ קל. את הדופק הגבוה שומרים לקילומטרים האחרונים.</span></li>
-    <li><span class="dot">🛑</span><span><b>כאב חד שמשנה את הדפוס = עוצרים.</b> שבוע שמקפיצים לא הורס 12 שבועות. שבועיים עם פציעה — כן.</span></li>
-    <li><span class="dot">🏋️</span><span><b>אופציונלי:</b> אימון כוח קצר אחד–שניים בשבוע בחדר הכושר (רגליים וליבה) — הביטוח הכי טוב מפציעות.</span></li>
+    <li><span class="dot">👟</span><span><b>קדנס:</b> צעדים קצרים ונוחים. לא לשנות בכוח את הקצב הטבעי.</span></li>
+    <li><span class="dot">🐢</span><span><b>ריצה ארוכה מתחילה מביך-לאט.</b> 15 הדקות הראשונות הלוך-רוץ קל. אפשר להגביר בהמשך רק אם מרגיש טוב.</span></li>
+    <li><span class="dot">🛑</span><span><b>כאב חד שמשנה את הדפוס = עוצרים.</b> שבוע שמקפיצים לא הורס 12 שבועות. שבועיים עם פציעה - כן.</span></li>
+    <li><span class="dot">🏋️</span><span><b>אופציונלי:</b> אימון כוח קצר אחד–שניים בשבוע בחדר הכושר (רגליים וליבה) - לפי ההתאוששות וההרגשה.</span></li>
     <li><span class="dot">🍌</span><span><b>לפני ריצה ארוכה:</b> ארוחת בוקר קלה שעה–שעתיים לפני, ובקבוק מים.</span></li>
   </ul>
 
-  <h2 class="section">התוכנית, שבוע־שבוע</h2>
+  <h2 class="section" id="plan">התוכנית, שבוע־שבוע</h2><label for="week-picker" style="display:block;font-size:13px;margin-bottom:6px">קפיצה לשבוע</label><select id="week-picker"></select>
 
-  <div class="week">
+  <div class="week" id="week-1">
     <div class="w-head"><div><div class="w-num">שבוע 1</div><div class="w-title">חוזרים לשגרה</div></div><div class="w-dates">27.9–3.10</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">5 ק"מ</span><span class="r-note">קל, עם הפסקות הליכה לפי הצורך</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">5 ק"מ</span><span class="r-note">קל, להתרגל לשעה 06:00</span></div>
-      <div class="run"><span class="r-day">שישי</span><span class="r-km">7 ק"מ</span><span class="r-note">הארוכה הראשונה — לאט מאוד בהתחלה</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">5 ק"מ</span><span class="r-note">קל, ביום שמתאים לך</span></div>
+      <div class="run"><span class="r-day">שבת</span><span class="r-km">7 ק"מ</span><span class="r-note">הארוכה הראשונה - לאט מאוד בהתחלה</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 17 ק"מ</div>
     <div class="w-focus"><span>הפוקוס:</span> רק לצאת מהבית שלוש פעמים. הקצב לא מעניין אף אחד.</div>
   </div>
 
-  <div class="week">
+  <div class="week" id="week-2">
     <div class="w-head"><div><div class="w-num">שבוע 2</div><div class="w-title">קצב שיחה</div></div><div class="w-dates">4.10–10.10</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">5 ק"מ</span><span class="r-note">קל</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">6 ק"מ</span><span class="r-note">קל, לעבוד על צעדים קצרים</span></div>
-      <div class="run"><span class="r-day">שישי</span><span class="r-km">8 ק"מ</span><span class="r-note">ארוכה, דקת הליכה בכל 10 דקות</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">6 ק"מ</span><span class="r-note">קל, לעבוד על צעדים קצרים</span></div>
+      <div class="run"><span class="r-day">שבת</span><span class="r-km">8 ק"מ</span><span class="r-note">ארוכה, דקת הליכה בכל 10 דקות</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 19 ק"מ</div>
-    <div class="w-focus"><span>הפוקוס:</span> למצוא את הקצב שאפשר לדבר בו — ולהישאר בו.</div>
+    <div class="w-focus"><span>הפוקוס:</span> למצוא את הקצב שאפשר לדבר בו - ולהישאר בו.</div>
   </div>
 
-  <div class="week">
+  <div class="week" id="week-3">
     <div class="w-head"><div><div class="w-num">שבוע 3</div><div class="w-title">סיומת חיה</div></div><div class="w-dates">11.10–17.10</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">6 ק"מ</span><span class="r-note">קל</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">6 ק"מ</span><span class="r-note">קל</span></div>
-      <div class="run"><span class="r-day">שישי</span><span class="r-km">9 ק"מ</span><span class="r-note">ארוכה: 2 הק"מ האחרונים קצת יותר חיים</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">6 ק"מ</span><span class="r-note">קל</span></div>
+      <div class="run"><span class="r-day">שבת</span><span class="r-km">9 ק"מ</span><span class="r-note">ארוכה: 2 הק"מ האחרונים קצת יותר חיים</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 21 ק"מ</div>
-    <div class="w-focus"><span>הפוקוס:</span> ללמוד לסיים חזק — פה בונים את הרגל הספליט ההפוך.</div>
+    <div class="w-focus"><span>הפוקוס:</span> ללמוד לסיים חזק - פה בונים את הרגל הספליט ההפוך.</div>
   </div>
 
-  <div class="week cut">
+  <div class="week cut" id="week-4">
     <div class="w-head"><div><div class="w-num">שבוע 4 <span class="tag cut">שבוע ריכוך</span></div><div class="w-title">לתת לגוף לבנות</div></div><div class="w-dates">18.10–24.10</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">4 ק"מ</span><span class="r-note">קל מאוד</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">5 ק"מ</span><span class="r-note">קל מאוד</span></div>
-      <div class="run"><span class="r-day">שישי</span><span class="r-km">6 ק"מ</span><span class="r-note">ארוכה קצרה, בכיף</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">5 ק"מ</span><span class="r-note">קל מאוד</span></div>
+      <div class="run"><span class="r-day">שבת</span><span class="r-km">6 ק"מ</span><span class="r-note">ארוכה קצרה, בכיף</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 15 ק"מ</div>
     <div class="w-focus"><span>הפוקוס:</span> ההתחזקות קורית דווקא במנוחה. לא לקצץ את הריכוך.</div>
   </div>
 
-  <div class="week">
+  <div class="week" id="week-5">
     <div class="w-head"><div><div class="w-num">שבוע 5</div><div class="w-title">מתחילים לשחק</div></div><div class="w-dates">25.10–31.10</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">6 ק"מ</span><span class="r-note">קל</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">6 ק"מ</span><span class="r-note">קל + בסוף 4 פעמים 20 שניות של צעדים מהירים (לא ספרינט)</span></div>
-      <div class="run"><span class="r-day">שישי</span><span class="r-km">10 ק"מ</span><span class="r-note">ארוכה — ספרה כפולה ראשונה!</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">6 ק"מ</span><span class="r-note">קל + בסוף 4 פעמים 20 שניות של צעדים מהירים (לא ספרינט)</span></div>
+      <div class="run"><span class="r-day">שבת</span><span class="r-km">10 ק"מ</span><span class="r-note">ארוכה - ספרה כפולה ראשונה!</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 22 ק"מ</div>
     <div class="w-focus"><span>הפוקוס:</span> הצעדים המהירים מלמדים את הרגליים קדנס בלי מאמץ.</div>
   </div>
 
-  <div class="week">
+  <div class="week" id="week-6">
     <div class="w-head"><div><div class="w-num">שבוע 6</div><div class="w-title">עובדים בשקט</div></div><div class="w-dates">1.11–7.11</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">6 ק"מ</span><span class="r-note">קל</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">7 ק"מ</span><span class="r-note">קל</span></div>
-      <div class="run"><span class="r-day">שישי</span><span class="r-km">11 ק"מ</span><span class="r-note">ארוכה</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">7 ק"מ</span><span class="r-note">קל</span></div>
+      <div class="run"><span class="r-day">שבת</span><span class="r-km">11 ק"מ</span><span class="r-note">ארוכה</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 24 ק"מ</div>
-    <div class="w-focus"><span>הפוקוס:</span> שבוע "משעמם" — בדיוק ככה נראית התקדמות בריאה.</div>
+    <div class="w-focus"><span>הפוקוס:</span> שבוע "משעמם" - בדיוק ככה נראית התקדמות בריאה.</div>
   </div>
 
-  <div class="week">
+  <div class="week" id="week-7">
     <div class="w-head"><div><div class="w-num">שבוע 7</div><div class="w-title">הכי הרבה שרצת השנה</div></div><div class="w-dates">8.11–14.11</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">6 ק"מ</span><span class="r-note">קל</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">7 ק"מ</span><span class="r-note">קל + 4 פעמים 20 שניות צעדים מהירים</span></div>
-      <div class="run"><span class="r-day">שישי</span><span class="r-km">13 ק"מ</span><span class="r-note">ארוכה: להתחיל מביך-לאט</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">7 ק"מ</span><span class="r-note">קל + 4 פעמים 20 שניות צעדים מהירים</span></div>
+      <div class="run"><span class="r-day">שבת</span><span class="r-km">13 ק"מ</span><span class="r-note">ארוכה: להתחיל מביך-לאט</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 26 ק"מ</div>
     <div class="w-focus"><span>הפוקוס:</span> 13 ק"מ זה כבר שטח של רץ. להתייחס לשינה ולמים ברצינות.</div>
   </div>
 
-  <div class="week cut">
+  <div class="week cut" id="week-8">
     <div class="w-head"><div><div class="w-num">שבוע 8 <span class="tag cut">שבוע ריכוך</span></div><div class="w-title">לספוג את העבודה</div></div><div class="w-dates">15.11–21.11</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">5 ק"מ</span><span class="r-note">קל מאוד</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">6 ק"מ</span><span class="r-note">קל מאוד</span></div>
-      <div class="run"><span class="r-day">שישי</span><span class="r-km">9 ק"מ</span><span class="r-note">ארוכה קצרה</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">6 ק"מ</span><span class="r-note">קל מאוד</span></div>
+      <div class="run"><span class="r-day">שבת</span><span class="r-km">9 ק"מ</span><span class="r-note">ארוכה קצרה</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 20 ק"מ</div>
     <div class="w-focus"><span>הפוקוס:</span> אמצע הדרך. לבדוק נעליים, גרביים, ומה הגוף מספר.</div>
   </div>
 
-  <div class="week">
+  <div class="week" id="week-9">
     <div class="w-head"><div><div class="w-num">שבוע 9</div><div class="w-title">טעימה מקצב מרוץ</div></div><div class="w-dates">22.11–28.11</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">7 ק"מ</span><span class="r-note">קל</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">8 ק"מ</span><span class="r-note">קל, ובאמצע 3 ק"מ בקצב "נוח-קשה" — כמו שתרצה להרגיש במרוץ</span></div>
-      <div class="run"><span class="r-day">שישי</span><span class="r-km">14 ק"מ</span><span class="r-note">ארוכה</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">8 ק"מ</span><span class="r-note">קל, ובאמצע 3 ק"מ בקצב "נוח-קשה" - כמו שתרצה להרגיש במרוץ</span></div>
+      <div class="run"><span class="r-day">שבת</span><span class="r-km">14 ק"מ</span><span class="r-note">ארוכה</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 29 ק"מ</div>
-    <div class="w-focus"><span>הפוקוס:</span> הריצה האיכותית היחידה בשבוע. יום אחריה — רק קל.</div>
+    <div class="w-focus"><span>הפוקוס:</span> הריצה האיכותית היחידה בשבוע. יום אחריה - רק קל.</div>
   </div>
 
-  <div class="week">
+  <div class="week" id="week-10">
     <div class="w-head"><div><div class="w-num">שבוע 10</div><div class="w-title">הריצה הארוכה של התוכנית</div></div><div class="w-dates">29.11–5.12</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">7 ק"מ</span><span class="r-note">קל</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">8 ק"מ</span><span class="r-note">קל</span></div>
-      <div class="run"><span class="r-day">שישי</span><span class="r-km">16 ק"מ</span><span class="r-note">השיא: 16 ק"מ. אוכל לפני, מים בדרך, אגו בבית</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">8 ק"מ</span><span class="r-note">קל</span></div>
+      <div class="run"><span class="r-day">שבת</span><span class="r-km">16 ק"מ</span><span class="r-note">השיא: 16 ק"מ. אוכל לפני, מים בדרך, אגו בבית</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 31 ק"מ</div>
-    <div class="w-focus"><span>הפוקוס:</span> מי שמסיים 16 ק"מ בריא — מסיים חצי מרתון. זו ההוכחה.</div>
+    <div class="w-focus"><span>הפוקוס:</span> לתרגל ריצה ארוכה, שתייה ואכילה. המטרה היא להגיע למרוץ בריא.</div>
   </div>
 
-  <div class="week">
+  <div class="week" id="week-11">
     <div class="w-head"><div><div class="w-num">שבוע 11</div><div class="w-title">יורדים במדרגות</div></div><div class="w-dates">6.12–12.12</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">5 ק"מ</span><span class="r-note">קל</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">6 ק"מ</span><span class="r-note">קל + 4 פעמים 20 שניות צעדים מהירים</span></div>
-      <div class="run"><span class="r-day">שישי</span><span class="r-km">10 ק"מ</span><span class="r-note">ארוכה קצרה יחסית, להרגיש קליל</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">6 ק"מ</span><span class="r-note">קל + 4 פעמים 20 שניות צעדים מהירים</span></div>
+      <div class="run"><span class="r-day">שבת</span><span class="r-km">10 ק"מ</span><span class="r-note">ארוכה קצרה יחסית, להרגיש קליל</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 21 ק"מ</div>
     <div class="w-focus"><span>הפוקוס:</span> להגיע לשבוע המרוץ רעב לרוץ, לא שחוק.</div>
   </div>
 
-  <div class="week race">
+  <div class="week race" id="week-12">
     <div class="w-head"><div><div class="w-num">שבוע 12 <span class="tag race">שבוע מרוץ</span></div><div class="w-title">🏁 21.1 ק"מ</div></div><div class="w-dates">13.12–18.12</div></div>
     <div class="runs">
       <div class="run"><span class="r-day">ראשון</span><span class="r-km">4 ק"מ</span><span class="r-note">קל מאוד, רק להזיז</span></div>
-      <div class="run"><span class="r-day">שלישי</span><span class="r-km">3 ק"מ</span><span class="r-note">קל מאוד + 3 פעמים 20 שניות צעדים מהירים</span></div>
+      <div class="run"><span class="r-day">גמיש</span><span class="r-km">3 ק"מ</span><span class="r-note">קל מאוד + 3 פעמים 20 שניות צעדים מהירים</span></div>
       <div class="run"><span class="r-day">שישי</span><span class="r-km">21.1</span><span class="r-note">המרוץ! 5 ק"מ ראשונים לאט ממה שמרגיש נכון. מחייכים בתמונות.</span></div>
     </div>
     <div class="w-total">סה"כ שבועי: 28.1 ק"מ</div>
@@ -259,9 +278,64 @@
   </div>
 
   <footer>
-    נבנה באהבה על ידי ראול · התוכנית גמישה — החמצת ריצה? ממשיכים מהשבוע שאתה בו, בלי להשלים פערים.
+    נבנה באהבה על ידי ראול · התוכנית גמישה - החמצת ריצה? ממשיכים מהשבוע שאתה בו, בלי להשלים פערים.
   </footer>
 
 </div>
+
+<script id="run-data" type="application/json">[
+  {
+    "date": "2026-09-30",
+    "label": "רביעי 30.9",
+    "km": "5.3",
+    "estimated": false,
+    "duration": "39:00",
+    "pace": "7:22",
+    "hr": null,
+    "note": "ריצה קלה"
+  },
+  {
+    "date": "2026-10-04",
+    "label": "ראשון 4.10",
+    "km": "5.6",
+    "estimated": true,
+    "duration": "40:15",
+    "pace": "7:07",
+    "hr": 133,
+    "note": "מרחק משוער לפי זמן וקצב"
+  },
+  {
+    "date": "2026-10-07",
+    "label": "רביעי 7.10",
+    "km": "6.0",
+    "estimated": true,
+    "duration": "44:29",
+    "moving": "44:11",
+    "pace": "7:24",
+    "hr": 134,
+    "maxHr": 155,
+    "te": 3.0,
+    "note": "הריצה הגמישה של שבוע 2 · מרחק משוער"
+  }
+]</script>
+<script>
+const runs=JSON.parse(document.getElementById('run-data').textContent);
+const metric=(label,value)=>`<div class="metric"><small>${label}</small><b dir="ltr">${value}</b></div>`;
+document.getElementById('run-log').innerHTML=[...runs].sort((a,b)=>b.date.localeCompare(a.date)).map(r=>`<article class="log-card"><div class="log-top"><span class="log-date">${r.label}</span><span class="log-distance"><bdi>${r.estimated?'~':''}${r.km}</bdi> <small>ק"מ</small></span></div><div class="log-metrics">${metric('זמן כולל',r.duration)}${metric('קצב / ק״מ',r.pace)}${metric('דופק ממוצע',r.hr??'לא נמסר')}</div>${r.moving?`<p class="log-note">זמן תנועה <bdi>${r.moving}</bdi> · דופק מרבי ${r.maxHr} · TE אירובי <bdi>${r.te.toFixed(1)}</bdi></p>`:''}<p class="log-note">${r.note}</p></article>`).join('');
+const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const start=new Date('2026-09-27T12:00:00Z'), day=new Date(today+'T12:00:00Z');
+const rawWeek=Math.floor((day-start)/604800000)+1;
+const w=Math.min(12,Math.max(1,rawWeek));
+const cards=[...document.querySelectorAll('.week')];
+const picker=document.getElementById('week-picker');
+picker.innerHTML=cards.map((c,i)=>`<option value="${i+1}">שבוע ${i+1} · ${c.querySelector('.w-dates').textContent}</option>`).join('');picker.value=w;
+picker.addEventListener('change',()=>document.getElementById('week-'+picker.value).scrollIntoView({behavior:'smooth',block:'start'}));
+if(rawWeek>=1&&rawWeek<=12){cards[w-1].classList.add('current');cards[w-1].insertAdjacentHTML('afterbegin','<div class="week-label">השבוע הנוכחי</div>');}
+const longs=[7,8,9,6,10,11,13,9,14,16,10,21.1];
+const n=document.getElementById('next');
+if(today>'2026-12-18'){n.innerHTML='<div class="eyebrow">התוכנית והריצות נשמרות כאן</div><h2 id="next-title">הדרך ל-21.1</h2><p>יומן הריצות מופיע למטה.</p>';}
+else if(today<='2026-10-10'){n.innerHTML='<div class="eyebrow">הבא לפי התוכנית · שבת 10.10</div><h2 id="next-title">8 ק״מ ארוכה</h2><p>דקת הליכה בכל 10 דקות ריצה. להתחיל לאט, בקצב שאפשר לדבר בו.</p>';}
+else {n.innerHTML=`<div class="eyebrow">שבוע ${w} · העוגן של השבוע</div><h2 id="next-title">${longs[w-1]} ק״מ ${w===12?'במרוץ ביום שישי':'בשבת'}</h2><p>ראשון בדרך כלל לשחרור. הריצה הנוספת גמישה לפי ההרגשה וההתאוששות.</p>`;}
+</script>
 </body>
 </html>
