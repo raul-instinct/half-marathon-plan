@@ -125,7 +125,7 @@ nav.quick a {color:#23272e;background:white;border:1px solid #e6e1d6;padding:10p
   <nav class="quick" aria-label="ניווט בעמוד"><a href="#next">הריצה הבאה</a><a href="#log">הריצות שלך</a><a href="#plan">כל התוכנית</a></nav></header>
 <section class="next" id="next" aria-labelledby="next-title"></section>
 <div class="structure" aria-label="מבנה השבוע"><div><b>שבת</b>ריצה ארוכה</div><div><b>ראשון</b>בדרך כלל שחרור</div><div><b>שאר הימים</b>הריצה הנוספת גמישה</div></div>
-<section id="log" aria-labelledby="log-title"><h2 class="section" id="log-title">הריצות שלך</h2><div id="run-log"></div><p class="freshness">עדכון אחרון: 7.10.2026 · לפי הנתונים ששלחת. אין חיבור אוטומטי ל-Garmin.</p></section>
+<section id="log" aria-labelledby="log-title"><h2 class="section" id="log-title">הריצות שלך</h2><div id="run-log"></div><p class="freshness">עדכון אחרון: 11.10.2026 · לפי הנתונים ששלחת. אין חיבור אוטומטי ל-Garmin.</p></section>
 
 
   <div class="honest">
@@ -283,7 +283,8 @@ nav.quick a {color:#23272e;background:white;border:1px solid #e6e1d6;padding:10p
 
 </div>
 
-<script id="run-data" type="application/json">[
+<script id="run-data" type="application/json">
+[
   {
     "date": "2026-09-30",
     "label": "רביעי 30.9",
@@ -316,12 +317,29 @@ nav.quick a {color:#23272e;background:white;border:1px solid #e6e1d6;padding:10p
     "maxHr": 155,
     "te": 3.0,
     "note": "הריצה הגמישה של שבוע 2 · מרחק משוער"
+  },
+  {
+    "date": "2026-10-11",
+    "label": "ראשון 11.10",
+    "km": "7.0",
+    "estimated": true,
+    "duration": "53:17",
+    "elapsed": "1:07:20",
+    "moving": "53:00",
+    "pace": "7:33",
+    "movingPace": "7:31",
+    "hr": 129,
+    "maxHr": 152,
+    "te": 3.0,
+    "teAnaerobic": 0.2,
+    "note": "הארוכה של שבת נדחתה ליום ראשון · מרחק משוער לפי זמן וקצב"
   }
-]</script>
+]
+</script>
 <script>
 const runs=JSON.parse(document.getElementById('run-data').textContent);
 const metric=(label,value)=>`<div class="metric"><small>${label}</small><b dir="ltr">${value}</b></div>`;
-document.getElementById('run-log').innerHTML=[...runs].sort((a,b)=>b.date.localeCompare(a.date)).map(r=>`<article class="log-card"><div class="log-top"><span class="log-date">${r.label}</span><span class="log-distance"><bdi>${r.estimated?'~':''}${r.km}</bdi> <small>ק"מ</small></span></div><div class="log-metrics">${metric('זמן כולל',r.duration)}${metric('קצב / ק״מ',r.pace)}${metric('דופק ממוצע',r.hr??'לא נמסר')}</div>${r.moving?`<p class="log-note">זמן תנועה <bdi>${r.moving}</bdi> · דופק מרבי ${r.maxHr} · TE אירובי <bdi>${r.te.toFixed(1)}</bdi></p>`:''}<p class="log-note">${r.note}</p></article>`).join('');
+document.getElementById('run-log').innerHTML=[...runs].sort((a,b)=>b.date.localeCompare(a.date)).map(r=>`<article class="log-card"><div class="log-top"><span class="log-date">${r.label}</span><span class="log-distance"><bdi>${r.estimated?'~':''}${r.km}</bdi> <small>ק"מ</small></span></div><div class="log-metrics">${metric('זמן כולל',r.duration)}${metric('קצב / ק״מ',r.pace)}${metric('דופק ממוצע',r.hr??'לא נמסר')}</div>${r.moving?`<p class="log-note">זמן תנועה <bdi>${r.moving}</bdi>${r.elapsed?` · זמן שחלף <bdi>${r.elapsed}</bdi>`:''}${r.movingPace?` · קצב בתנועה <bdi>${r.movingPace}</bdi>`:''} · דופק מרבי ${r.maxHr} · TE אירובי <bdi>${r.te.toFixed(1)}</bdi>${r.teAnaerobic!==undefined?` / אנאירובי <bdi>${r.teAnaerobic.toFixed(1)}</bdi>`:''}</p>`:''}<p class="log-note">${r.note}</p></article>`).join('');
 const today=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const start=new Date('2026-09-27T12:00:00Z'), day=new Date(today+'T12:00:00Z');
 const rawWeek=Math.floor((day-start)/604800000)+1;
@@ -334,7 +352,7 @@ if(rawWeek>=1&&rawWeek<=12){cards[w-1].classList.add('current');cards[w-1].inser
 const longs=[7,8,9,6,10,11,13,9,14,16,10,21.1];
 const n=document.getElementById('next');
 if(today>'2026-12-18'){n.innerHTML='<div class="eyebrow">התוכנית והריצות נשמרות כאן</div><h2 id="next-title">הדרך ל-21.1</h2><p>יומן הריצות מופיע למטה.</p>';}
-else if(today<='2026-10-10'){n.innerHTML='<div class="eyebrow">הבא לפי התוכנית · שבת 10.10</div><h2 id="next-title">8 ק״מ ארוכה</h2><p>דקת הליכה בכל 10 דקות ריצה. להתחיל לאט, בקצב שאפשר לדבר בו.</p>';}
+else if(today<='2026-10-17'){n.innerHTML='<div class="eyebrow">הריצה הבאה · שבת 17.10</div><h2 id="next-title">9 ק״מ ארוכה</h2><p>דקת הליכה בכל 10 דקות ריצה. בשני הקילומטרים האחרונים אפשר להגביר מעט, אם מרגיש טוב.</p>';}
 else {n.innerHTML=`<div class="eyebrow">שבוע ${w} · העוגן של השבוע</div><h2 id="next-title">${longs[w-1]} ק״מ ${w===12?'במרוץ ביום שישי':'בשבת'}</h2><p>ראשון בדרך כלל לשחרור. הריצה הנוספת גמישה לפי ההרגשה וההתאוששות.</p>`;}
 </script>
 </body>
